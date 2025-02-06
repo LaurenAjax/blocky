@@ -16,7 +16,6 @@ public class BlockyGame {
         board = new Board();
         movement = Direction.NONE;
         lockCounter = 0;
-        trySpawnBlock();
     }
     
     private void trySpawnBlock() {
