@@ -16,11 +16,12 @@ public class BlockyGame {
         board = new Board();
         movement = Direction.NONE;
         lockCounter = 0;
+        trySpawnBlock();
     }
     
     private void trySpawnBlock() {
         if (activePiece == null) {
-            activePiece = new Piece(PieceKind.I, new Position(Constants.BOARD_HEIGHT - 1, Constants.BOARD_WIDTH / 2 - 2));
+            activePiece = new Piece(PieceKind.I, new Position(Constants.BOARD_HEIGHT - 20, Constants.BOARD_WIDTH / 2 - 2));
             if (board.collides(activePiece)) {
                 System.exit(0);
             }
@@ -47,7 +48,7 @@ public class BlockyGame {
     }
     
     private void processGravity() {
-        Position nextPos = activePiece.getPosition().add(-1, 0);
+        Position nextPos = activePiece.getPosition().add(1, 0);
         if (!board.collides(activePiece.getLayout(), nextPos)) {
             lockCounter = 0;
             activePiece.moveTo(nextPos);
