@@ -14,7 +14,7 @@ public class Board {
     }
     
     public boolean isValidPosition(int row, int col) {
-        return row >= 0 && row <= well.length && col >= 0 && col <= well[0].length;
+        return row >= 0 && row <= well.length - 1 && col >= 0 && col <= well[0].length;
     }
     
     public boolean collides(Piece p) {
@@ -23,7 +23,7 @@ public class Board {
     
     public boolean collides(boolean[][] layout, Position pos) {
         for (int row = 0; row < layout.length; row++) {
-            int wellRow = pos.row - row;
+            int wellRow = pos.row + row;
             for (int col = 0; col < layout[row].length; col++) {
                 int wellCol = col + pos.col;
                 if (layout[row][col]) {
