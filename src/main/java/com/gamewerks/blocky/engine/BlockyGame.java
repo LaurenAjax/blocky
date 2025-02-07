@@ -43,14 +43,14 @@ public class BlockyGame {
         default:
             throw new IllegalStateException("Unrecognized direction: " + movement.name());
         }
-        if (!board.collides(activePiece.getLayout(), nextPos)) {
+        if (!board.collides(activePiece)) {
             activePiece.moveTo(nextPos);
         }
     }
     
     private void processGravity() {
         Position nextPos = activePiece.getPosition().add(1, 0);
-        if (!board.collides(activePiece.getLayout(), nextPos)) {
+        if (!board.collides(activePiece)) {
             lockCounter = 0;
             activePiece.moveTo(nextPos);
         } else {
