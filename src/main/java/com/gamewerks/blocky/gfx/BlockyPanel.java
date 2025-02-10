@@ -18,6 +18,11 @@ public class BlockyPanel extends JPanel {
     private int height;
     private BlockyGame game;
     
+    /**
+     * Builds a panel of the specified size
+     * 
+     * @param game the game for which the panel is being built
+     */
     public BlockyPanel(BlockyGame game) {
         width = Constants.BOARD_WIDTH * BLOCK_SIZE;
         height = (Constants.BOARD_HEIGHT - 2) * BLOCK_SIZE;
@@ -25,6 +30,12 @@ public class BlockyPanel extends JPanel {
         setPreferredSize(new Dimension(width, height));
     }
     
+    /**
+     * Paints the background gray, the active piece blue, and the inactive
+     * pieces green
+     * 
+     * @param g the graphics that make up the game
+     */
     public void paintComponent(Graphics g) {
         boolean[][] well = game.getWell();
         g.setColor(Color.GRAY);

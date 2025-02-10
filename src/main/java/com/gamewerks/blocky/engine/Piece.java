@@ -23,24 +23,50 @@ public class Piece {
     private int orientation;
     private Position pos;
     
+    /**
+     * Builds a piece of the given kind at the given position
+     * 
+     * @param kind the type of piece
+     * @param pos the location of the piece
+     */
     public Piece(PieceKind kind, Position pos) {
         this.kind = kind;
         orientation = 0;
         this.pos = pos;
     }
     
+    /**
+     * Returns the location of a piece
+     * 
+     * @return the row and column where the piece is located
+     */
     public Position getPosition() {
         return pos;
     }
     
+    /**
+     * Changes the location of a piece
+     * 
+     * @param p the current position of the piece
+     */
     public void moveTo(Position p) {
         pos = p;
     }
     
+    /**
+     * Gives the shape and make of a piece
+     * 
+     * @return the layout of the piece
+     */
     public boolean[][] getLayout() {
         return ((boolean[][][]) ROTATION_DATA.get(kind))[orientation];
     }
     
+    /**
+     * Indicates the orientation of a piece
+     * 
+     * @param dir the direction the piece is rotated
+     */
     public void rotate(boolean dir) {
         if (dir) {
             orientation = (orientation + 1) % 4;

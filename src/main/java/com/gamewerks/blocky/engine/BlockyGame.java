@@ -15,6 +15,10 @@ public class BlockyGame {
     private int currentPiece = 0;
     private PieceKind[] pieceArray = shuffle(PieceKind.ALL);
     
+    /**
+     * Builds a blocky game and sets up the first block
+     * 
+     */
     public BlockyGame() {
         board = new Board();
         movement = Direction.NONE;
@@ -22,6 +26,13 @@ public class BlockyGame {
         trySpawnBlock();
     }
     
+    /**
+     * Shuffles an array containing the various different pieces
+     * 
+     * @param pieces a standard array of all the different pieces
+     * @return returns a new array containing all the pieces of the given array
+     * in a new order
+     */
     private PieceKind[] shuffle(PieceKind[] pieces) {
         int arr[] = {0, 1, 2, 3, 4, 5, 6};
         PieceKind[] newPieces = new PieceKind[7];
@@ -38,6 +49,10 @@ public class BlockyGame {
         return newPieces;
     }
     
+    /**
+     * Spawns a random piece in the top center of the panel
+     * 
+     */
     private void trySpawnBlock() {
         if (activePiece == null) {
             activePiece = new Piece(pieceArray[currentPiece], new Position(Constants.BOARD_HEIGHT - 19, Constants.BOARD_WIDTH / 2 - 2));
@@ -52,6 +67,11 @@ public class BlockyGame {
         }
     }
     
+    /**
+     * Processes and makes movement depending on keyboard inputs, unless it 
+     * collides with something
+     * 
+     */
     private void processMovement() {
         Position nextPos;
         switch(movement) {
@@ -72,6 +92,10 @@ public class BlockyGame {
         }
     }
     
+    /**
+     * Allows piece to slowly descend an eventually lock in place
+     * 
+     */
     private void processGravity() {
         Position nextPos = activePiece.getPosition().add(1, 0);
         if (!board.collides(activePiece.getLayout(), nextPos)) {
@@ -88,10 +112,19 @@ public class BlockyGame {
         }
     }
     
+    /**
+     * Deletes the lines that have been completed
+     * 
+     */
     private void processClearedLines() {
         board.deleteRows(board.getCompletedRows());
     }
     
+    /**
+     * Moves throught the cycle of spawning a block, moving it, and clearing 
+     * any completed rows
+     * 
+     */
     public void step() {
         trySpawnBlock();
         processMovement();
@@ -99,11 +132,34 @@ public class BlockyGame {
         processClearedLines();
     }
     
+    /**
+     * Retrieves the area of the board that is 'solid' so to speak
+     * 
+     * @return the well of already placed blocks
+     */
     public boolean[][] getWell() {
         return board.getWell();
     }
     
+    /**
+     * Returns the currently active piece
+     * 
+     * @return a piece that is to be moved
+     */
     public Piece getActivePiece() { return activePiece; }
+    
+    /**
+     * Sets movement to whatever was entered in the keyboard
+     * 
+     * @param movement the direction the piece is to be moved
+     */
     public void setDirection(Direction movement) { this.movement = movement; }
+    
+    /**
+     * Rotates the piece based on keyboard input
+     * 
+     * @param dir whether the piece will be rotated clockwise or 
+     * counterclockwise
+     */
     public void rotatePiece(boolean dir) { activePiece.rotate(dir); }
 }

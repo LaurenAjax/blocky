@@ -15,6 +15,11 @@ public class Blocky {
     private static final int FPS = 10;
     private static final double SPF = 1000000000.0 / FPS;
     
+    /**
+     * Builds the Blocky game and registers the keyboard inputs
+     * 
+     * @param args an array of strings given in the terminal
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,6 +32,11 @@ public class Blocky {
         frame.setVisible(true);
         
         frame.addKeyListener(new KeyAdapter() {
+            /**
+             * Determines what to do based on which key is pressed
+             * 
+             * @param e gives the key that is pressed when it is pressed
+             */
             public void keyPressed(KeyEvent e) {
                 int code = e.getKeyCode();
                 if (code == e.VK_LEFT) {
@@ -36,6 +46,11 @@ public class Blocky {
                 }
             }
             
+            /**
+             * Determines what to do based on which key is released
+             * 
+             * @param e gives the key that is released when it is released
+             */
             public void keyReleased(KeyEvent e) {
                 int code = e.getKeyCode();
                 if (code == e.VK_LEFT || code == e.VK_RIGHT) {
